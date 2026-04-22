@@ -60,6 +60,15 @@ The redaction can also be performed via pipes, to support complex one-liners:
 cat /path/to/file | grep -e 'some_pattern' | opf
 ```
 
+By default, piped stdin is framed one input per non-empty line, which matches the
+`grep | opf` pattern above. To treat the full piped stream as one input instead
+(useful for multi-paragraph documents where detected spans should carry context
+across line breaks), pass `--stdin-mode whole`:
+
+```bash
+cat /path/to/document.md | opf --stdin-mode whole
+```
+
 If no input is provided, `opf` will start in interactive mode. In this mode, for each input example, the CLI prints structured JSON output, using ANSI color-coded previews if the terminal supports them. These options can be controlled by flags.
 
 Consult `opf redact --help` for more flags and information about the redaction mode.

@@ -4,7 +4,12 @@ import sys
 import time
 from typing import Sequence
 
-from ._cli.common import CliHelpFormatter, add_checkpoint_arg, resolve_prog
+from ._cli.common import (
+    CliHelpFormatter,
+    add_checkpoint_arg,
+    add_stdin_mode_arg,
+    resolve_prog,
+)
 from ._cli.args import (
     add_common_redaction_args,
     iter_inputs,
@@ -75,6 +80,7 @@ def build_redaction_parser(*, prog: str | None = None) -> argparse.ArgumentParse
             "(repeat for multiple files)."
         ),
     )
+    add_stdin_mode_arg(input_group)
     parser.set_defaults(
         interactive_banner="OPF redaction. Type '/exit' (or 'quit') to stop.",
         interactive_prompt="text> ",

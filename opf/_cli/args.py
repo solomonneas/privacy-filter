@@ -99,6 +99,12 @@ def iter_inputs(args: argparse.Namespace) -> Iterator[str]:
         return
 
     if not sys.stdin.isatty():
+        stdin_mode = getattr(args, "stdin_mode", "line")
+        if stdin_mode == "whole":
+            content = sys.stdin.read()
+            if content.strip():
+                yield content
+            return
         for raw in sys.stdin:
             line = raw.rstrip("\r\n")
             if not line.strip():

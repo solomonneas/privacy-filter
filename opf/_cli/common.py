@@ -22,6 +22,12 @@ OUTPUT_MODE_HELP = (
     "typed: keep model categories.\n"
     "redacted: collapse all spans into one generic redacted label."
 )
+STDIN_MODE_HELP = (
+    "How to frame piped stdin as inputs.\n"
+    "line: treat each non-empty line as one input (default).\n"
+    "whole: read stdin until EOF and treat the full content as one input."
+)
+STDIN_MODES = ("line", "whole")
 
 
 class CliHelpFormatter(
@@ -116,6 +122,16 @@ def add_output_mode_arg(parser: object) -> None:
         choices=OUTPUT_MODES,
         default="typed",
         help=OUTPUT_MODE_HELP,
+    )
+
+
+def add_stdin_mode_arg(parser: object) -> None:
+    """Add the shared ``--stdin-mode`` argument."""
+    parser.add_argument(
+        "--stdin-mode",
+        choices=STDIN_MODES,
+        default="line",
+        help=STDIN_MODE_HELP,
     )
 
 
