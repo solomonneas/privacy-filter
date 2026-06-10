@@ -9,3 +9,7 @@ local_scripts/
 .DS_Store
 web_exports.jsonl
 .claude/
+
+# Local brigade memory (cards are local-only, never committed)
+/memory/
+.brigade/
