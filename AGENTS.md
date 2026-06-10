@@ -5,7 +5,11 @@ token-classification model (1.5B params, BIOES span labels over 8 PII
 categories) with the `opf` CLI for redaction, eval, and finetuning.
 
 ## Definition of Done
-- Before reporting any code change as complete, run `python3 -m unittest discover tests` and report the actual output (test count and OK/FAILED).
+```bash
+./scripts/verify
+```
+It runs the unit tests (`python3 -m unittest discover tests`); they never load the model, so no weights download is triggered.
+- Before reporting any code change as complete, run `./scripts/verify` and report the actual output (test count and OK/FAILED).
 - If anything fails: paste the failure verbatim, do not claim success, do not weaken, skip, or delete the failing test to get green.
 - If a command cannot run (missing dep, sandbox limit), report the exact error and stop; do not work around it silently and do not report done.
 
