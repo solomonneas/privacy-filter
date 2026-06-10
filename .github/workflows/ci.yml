@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # No `pip install` step on purpose: the unit tests import only
+      # stdlib plus `opf` CLI modules whose heavy deps (torch, etc.) are
+      # lazy-imported, and scripts/verify runs unittest from the repo
+      # root, so the package resolves without installation. Verified in
+      # a fresh venv with zero packages installed. No model weights are
+      # ever downloaded (see scripts/verify).
+      - name: Verify
+        run: ./scripts/verify
